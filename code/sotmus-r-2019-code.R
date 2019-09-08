@@ -6,10 +6,14 @@ nrow(pkgs)
 update.packages()
 remove.packages("osmdata")
 
+install.packages("magrittr", "osmdata", "sf", "sp")
+#install.packages("tmap") --> don't recommend on RStudio.cloud
+
 library(magrittr)
 library(osmdata)
 library(sf)
 library(sp)
+#library(tmap)
 
 #Downloading OSM Data
 opq(bbox = 'minneapolis') %>%
@@ -70,3 +74,7 @@ plot(mpls_sf)
 
 plot(mpls_cycleways$osm_lines)
 plot(mpls_boundaries$osm_lines, add = T, col = "red")
+
+#advanced plotting:
+tmap_mode("view")
+tm_shape(mpls_sf$osm_lines) + tm_lines("bridge", lwd = 3)

@@ -31,6 +31,12 @@ nrow(pkgs)
 ### Packages
 
 What is a package anyway? It's a way to extend R by grouping together useful functions (you can write your own and put it on Github/submit it to CRAN!). You should have already installed all the packages you need for this tutorial. 
+We're going to use the following packages:
+```{r}
+install.packages("magrittr", "osmdata", "sf", "sp")
+#install.packages("tmap") --> don't recommend on RStudio.cloud
+```
+
 
 To update your installed packages, run the following command:
 
@@ -50,6 +56,9 @@ library(magrittr)
 library(osmdata)
 library(sf)
 library(sp)
+#library(leaflet)
+#library(tmap)
+
 ```
 
 ## Download OSM data
@@ -60,7 +69,7 @@ For the Overpass query, you need:
 
 - The bounding box of your area
 - The name of the feature you're looking for (i.e. "name", "highway")
-- The desired value of that feature (i.e. "Detroit", "bikeway")
+- The desired value of that feature (i.e. "Minneapolis", "bikeway")
 
 The final overpass query looks something like this:
 ```{r eval = FALSE}
@@ -71,7 +80,7 @@ opq(bbox = 'minneapolis') %>%
 
 ### Get the bounding box
 
-Let's look at how we can construct a query. First, let's get the bounding box for Detroit.
+Let's look at how we can construct a query. First, let's get the bounding box for Minneapolis.
 ```{r}
 mpls_bb <- getbb(place_name = "minneapolis")
 ```
@@ -85,7 +94,7 @@ opq(bbox = c(-93.32916,44.89015,-93.19386,45.05125)) # Also produces the same th
 
 ### Add the feature(s) we're interested in
 
-Let's say we want to find all OSM cycleways in Detroit. Take the output from the previous section and add a feature!
+Let's say we want to find all OSM cycleways in Minneapolis. Take the output from the previous section and add a feature!
 
 ```{r}
 opq(mpls_bb) %>% 
@@ -111,7 +120,7 @@ available_features()
 
 And for the values associated with that feature, run the `available_tags` function:
 ```{r}
-available_tags("highway"")
+available_tags("highway")
 ```
 
 ### Submit query to Overpass API
@@ -162,6 +171,13 @@ mpls_sf <- opq(mpls_bb) %>%
 Finally, plot the data:
 ```{r}
 plot(mpls_sf$osm_lines)
+```
+
+If you use a viz package like tmap or leaflet, you can make even more advanced maps with this data:
+Note: this uses tmap, which I don't suggest using if you aren't on Desktop! 
+```{r}
+tmap_mode("view")
+tm_shape(mpls_sf$osm_lines) + tm_lines("bridge", lwd = 3)
 ```
 
 ## Try it yourself
