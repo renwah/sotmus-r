@@ -67,9 +67,11 @@ Additional Resources
 -   [Overpass API Documentation](https://wiki.openstreetmap.org/wiki/Overpass_API/Overpass_API_by_Example): examples for learning more about structuring API queries to OpenStreetMap
 -   [*Geocomputation in R*](https://geocompr.robinlovelace.net): free online book about analyzing, visualizing, and modeling spatial data in R
 -   [*R for Data Science*](http://r4ds.had.co.nz): free online book about doing data science in R
+-   [*Remaster the Tidyverse*](https://github.com/rstudio-education/remaster-the-tidyverse): online modules for understanding the Tidyverse and its associated packages
 
 References
 ----------
+Thanks first of all to [Angela Li](https://github.com/angela-li), who originally created and presented this workshop at SOTMUS 2018!  
 
 Thanks to [Mark Padgham](https://github.com/mpadge) and [rOpenSci](https://ropensci.org/) for maintaining the osmdata package!
 
